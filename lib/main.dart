@@ -4,14 +4,11 @@ import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
 
-const request = "https://api.hgbrasil.com/finance?format=json-cors&key=7b2aadc8";
-
+const request =
+    "https://api.hgbrasil.com/finance?format=json-cors&key=7b2aadc8";
 
 void main() async {
-
-  runApp(MaterialApp(
-      home: Home()
-  ));
+  runApp(MaterialApp(home: Home()));
 }
 
 Future<Map> getData() async {
@@ -29,19 +26,23 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        backgroundColor: Colors.black,
-        appBar: AppBar(
-          title: Text("\$ Conversor \$"),
-          backgroundColor: Colors.amber
-          ,
-          centerTitle: true,
-        ),
-        body: Center(
-          child: Text('Conversor de Moedas'),
-        ),
-      ),
+    return Scaffold(
+          backgroundColor: Colors.black,
+          appBar: AppBar(
+            title: Text("\$ Conversor \$"),
+            backgroundColor: Colors.amber,
+            centerTitle: true,
+          ),
+          body: FutureBuilder<Map>(
+            future: getData(),
+            builder: (context, snapsht) {
+              switch(snapsht.connectionState){
+                case ConnectionState.none:
+                  return Center(
+                    child: Text("Carregando Dados ...")
+                  );
+              }
+            })
     );
   }
 }
