@@ -1,3 +1,4 @@
+// @dart=2.12
 import "package:flutter/material.dart";
 
 import 'package:http/http.dart' as http;
@@ -33,16 +34,7 @@ class _HomeState extends State<Home> {
             backgroundColor: Colors.amber,
             centerTitle: true,
           ),
-          body: FutureBuilder<Map>(
-            future: getData(),
-            builder: (context, snapsht) {
-              switch(snapsht.connectionState){
-                case ConnectionState.none:
-                  return Center(
-                    child: Text("Carregando Dados ...")
-                  );
-              }
-            })
+
     );
   }
 }
